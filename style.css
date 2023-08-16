@@ -1,0 +1,189 @@
+.body {
+  margin: 0;
+}
+
+.wrapper {
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  margin: 0;
+}
+
+.col-3 {
+  height: 100%;
+}
+
+.container {
+  background: linear-gradient(
+    180.3deg,
+    rgb(221, 221, 221) 5.5%,
+    rgb(110, 136, 161) 90.2%
+  );
+  width: 40%;
+  height: 60%;
+  margin: 100px auto 0 auto;
+  display: flex;
+  border-radius: 10px;
+  box-shadow: 4px 4px 10px rgba(120, 120, 119, 0.885);
+}
+
+.days {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-end;
+  flex-wrap: wrap;
+}
+.days div {
+  background-color: rgba(118, 132, 160, 0.682);
+  font-size: 13px;
+  margin: 3px 0;
+  padding: 8px 24px;
+  border-radius: 10px;
+  box-shadow: 3px 3px 4px rgba(103, 103, 34, 0.284);
+  transition: all 0.3s ease-in-out;
+  text-align: center;
+  color: rgb(255, 255, 255);
+}
+
+.days div img {
+  width: 25px;
+}
+
+.days div:hover {
+  scale: 1.1;
+  z-index: 10;
+  background-color: rgba(227, 244, 150, 0.605);
+}
+
+.days ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.head {
+  line-height: 90px;
+}
+
+.head li {
+  margin-top: 20px;
+}
+
+.head h1 {
+  margin: 25px 0;
+  font-size: 40px;
+  text-shadow: 3px 3px 5px rgba(7, 4, 4, 0.479);
+}
+
+.curr i {
+  margin: 25px;
+  display: flex;
+}
+
+.currtemp span {
+  margin: 3px;
+}
+
+.currtemp span:first-child {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.status ul {
+  list-style: none;
+  margin: 20px 0;
+  padding: 0;
+  line-height: 50px;
+  font-size: 20px;
+}
+
+.second ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  line-height: 40px;
+  margin-top: 30px;
+  font-size: 20px;
+}
+
+.second {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+
+.second ul {
+  line-height: 60px;
+}
+
+.specific ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+  line-height: 52px;
+}
+
+.specific ul span {
+  color: azure;
+}
+
+.specific li {
+  margin-top: 15px;
+}
+
+.specific {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
+  align-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.second form input,
+.btn {
+  width: 200px;
+  height: 40px;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  padding: 3px 5px;
+  margin: 8px auto;
+  background-color: rgba(255, 255, 255, 0.523);
+  transition: all 0.2s ease-in-out;
+  font-family: inherit;
+}
+
+.second input[type='submit'] {
+  width: 120px;
+  font-size: 15px;
+}
+
+.second input[type='submit']:hover,
+.btn:hover {
+  background-color: rgb(234, 245, 194);
+  scale: 1.1;
+}
+
+.formList {
+  display: flex;
+  flex-direction: column;
+}
+
+#celcius,
+#farenheit {
+  cursor: pointer;
+}
+
+form {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+}
+
+#desc,
+.head h1 {
+  text-transform: capitalize;
+}
