@@ -187,3 +187,8 @@ form {
 .head h1 {
   text-transform: capitalize;
 }
+
+.link a {
+  color: white;
+  font-size: 15px;
+}
