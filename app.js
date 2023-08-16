@@ -5,6 +5,7 @@ let btncurr = document.getElementById('btncurr');
 let form = document.querySelector('.form');
 let temp = document.getElementById('temp');
 let input = document.getElementById('input');
+let mainImg = document.getElementById('main');
 
 let city = document.getElementById('city');
 let humidity = document.querySelectorAll('#humidity');
@@ -54,6 +55,11 @@ function showWeather(response) {
   let cityDesc = response.data.weather[0].description;
   city.innerHTML = cityName;
   temp.innerHTML = cityTemp;
+  mainImg.setAttribute(
+    'src',
+    `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  mainImg.setAttribute('alt', response.data.weather[0].description);
   console.log(humidity);
   console.log(wind);
   humidity[0].innerHTML = `${cityHumid}%`;
