@@ -1,16 +1,21 @@
 // import axios from 'axios';
 
-let key = ''; //private
+let key = 'a96ffff2f3bc288c7960935106d1cfad'; //private
 let btncurr = document.getElementById('btncurr');
 let form = document.querySelector('.form');
 let temp = document.getElementById('temp');
 let input = document.getElementById('input');
 let mainImg = document.getElementById('main');
+let farenheit = document.getElementById('farenheit');
+let celcius = document.getElementById('celcius');
 
 let city = document.getElementById('city');
 let humidity = document.querySelectorAll('#humidity');
 let wind = document.querySelectorAll('#wind');
 let desc = document.getElementById('desc');
+
+let celciusTemp = null;
+let farenheitTemp = null;
 
 function displayDate() {
   let currDay = document.getElementById('day');
@@ -48,7 +53,8 @@ setInterval(displayDate, 1000);
 
 function showWeather(response) {
   console.log(response);
-  let cityTemp = Math.round(response.data.main.temp);
+  celciusTemp = response.data.main.temp;
+  let cityTemp = Math.round(celciusTemp);
   let cityName = response.data.name;
   let cityWind = Math.round(response.data.wind.speed);
   let cityHumid = response.data.main.humidity;
@@ -60,8 +66,6 @@ function showWeather(response) {
     `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   mainImg.setAttribute('alt', response.data.weather[0].description);
-  console.log(humidity);
-  console.log(wind);
   humidity[0].innerHTML = `${cityHumid}%`;
   humidity[1].innerHTML = `${cityHumid}%`;
   wind[0].innerHTML = `${cityWind}km/h`;
@@ -88,3 +92,20 @@ function checklocation() {
 }
 
 btncurr.addEventListener('click', checklocation);
+
+function convertToFarenheit(event) {
+  event.preventDefault();
+  farenheitTemp = celciusTemp * 1.8 + 32;
+  temp.innerHTML = Math.round(farenheitTemp);
+  farenheit.classList.add('active');
+  celcius.classList.remove('active');
+}
+farenheit.addEventListener('click', convertToFarenheit);
+
+function convertToCelcius(event) {
+  event.preventDefault();
+  temp.innerHTML = Math.round(celciusTemp);
+  farenheit.classList.remove('active');
+  celcius.classList.add('active');
+}
+celcius.addEventListener('click', convertToCelcius);

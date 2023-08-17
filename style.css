@@ -192,3 +192,16 @@ form {
   color: white;
   font-size: 15px;
 }
+
+.hover {
+  text-decoration: none;
+  color: black;
+}
+
+.hover:hover {
+  color: rgb(234, 245, 194);
+}
+
+.active {
+  color: rgb(255, 140, 0);
+}
