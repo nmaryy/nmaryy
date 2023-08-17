@@ -8,6 +8,13 @@ let input = document.getElementById('input');
 let mainImg = document.getElementById('main');
 let farenheit = document.getElementById('farenheit');
 let celcius = document.getElementById('celcius');
+let uv = document.getElementById('uv');
+let sunset = document.getElementById('sunset');
+let precip = document.getElementById('precip');
+let feels = document.getElementById('feels');
+let visib = document.getElementById('visib');
+let press = document.getElementById('press');
+let country = document.getElementById('country');
 
 let city = document.getElementById('city');
 let humidity = document.querySelectorAll('#humidity');
@@ -59,6 +66,13 @@ function showWeather(response) {
   let cityWind = Math.round(response.data.wind.speed);
   let cityHumid = response.data.main.humidity;
   let cityDesc = response.data.weather[0].description;
+  // let uvIndex = response.data.weather[0].description;
+  let sunsetresponse = new Date(response.data.sys.sunset * 1000);
+  // let precipitation = response.data.current.precipitation.value;
+  let feelsLike = Math.round(response.data.main.feels_like);
+  let visibility = response.data.visibility;
+  let pressure = response.data.main.pressure;
+  let cityCountry = response.data.sys.country;
   city.innerHTML = cityName;
   temp.innerHTML = cityTemp;
   mainImg.setAttribute(
@@ -71,6 +85,12 @@ function showWeather(response) {
   wind[0].innerHTML = `${cityWind}km/h`;
   wind[1].innerHTML = `${cityWind}km/h`;
   desc.innerHTML = cityDesc;
+  sunset.innerHTML = sunsetresponse.toLocaleTimeString();
+  // precip.innerHTML = precipitation;
+  feels.innerHTML = `${feelsLike}°C`;
+  visib.innerHTML = `${visibility / 1000}km`;
+  press.innerHTML = `${pressure}hPa`;
+  country.innerHTML = `${cityName}, ${cityCountry}`;
 }
 
 function Submitform(event) {

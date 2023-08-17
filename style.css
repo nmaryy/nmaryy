@@ -31,6 +31,7 @@
   flex-direction: column;
   align-content: flex-end;
   flex-wrap: wrap;
+  margin-top: 14px;
 }
 .days div {
   background-color: rgba(118, 132, 160, 0.682);
@@ -170,6 +171,7 @@
 .formList {
   display: flex;
   flex-direction: column;
+  margin-top: 84px;
 }
 
 #celcius,
