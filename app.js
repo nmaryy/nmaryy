@@ -1,8 +1,9 @@
 // import axios from 'axios';
 
-let key = 'a96ffff2f3bc288c7960935106d1cfad'; //private
+let key = '0ebc654fccbc00189d5408f3d6f15b08'; //private
 let btncurr = document.getElementById('btncurr');
 let form = document.querySelector('.form');
+let liDays = document.querySelector('.days');
 let temp = document.getElementById('temp');
 let input = document.getElementById('input');
 let mainImg = document.getElementById('main');
@@ -91,6 +92,7 @@ function showWeather(response) {
   visib.innerHTML = `${visibility / 1000}km`;
   press.innerHTML = `${pressure}hPa`;
   country.innerHTML = `${cityName}, ${cityCountry}`;
+  getPrediction(response.data.coord, cityName);
 }
 
 function Submitform(event) {
@@ -129,3 +131,43 @@ function convertToCelcius(event) {
   celcius.classList.add('active');
 }
 celcius.addEventListener('click', convertToCelcius);
+
+function getPrediction(coordinates, city) {
+  console.log(coordinates, city);
+  let thisKey = '3e340aaf70ff73cc9do1tdba1aa636e5';
+  // let predictAPI = `https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${key}&units=metric`;
+  let predictAPI = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${thisKey}&units=metric`;
+  axios.get(predictAPI).then(displayPrediction);
+}
+
+function displayPrediction(response) {
+  let dailyDays = response.data.daily;
+  dailyDays.forEach((d) => {
+    let dayd = new Date(d.time * 1000);
+    dayName = dayd.toGMTString().split(',')[0];
+    d.innerHTML = `
+    <div class="${dayName}">
+            <ul>
+              <li class="day">${dayName}</li>
+              <li class="icon">
+                <img
+                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAAQBJREFUaN7t2csNwyAMBmBGYYSMwhgdgxEYjRW6ARu4HNyqB0CKednElf5b2/hLSALGAICRHKMABSjgUMDdD7xfLifkxByoJOJ33O3/nwHIhVgsKDWKriXhb+0WQD6wJxZegvhlADzrcUDhpeFlpwLyAa5BZ711Na4pgAXFNxFdABw2K4r/R9iRgLiw+N89MQSATxvYFN8F2DB0qkOJCggbi/8m9AASA0AiAXBuA0ziKIDACBAogMgIECkAYBUFKEABzwOIf4yKf5HJnkqIn8wxmk775y5oxC8pj1jUH9FWEd/YOqK1eERz94j2euFqUCF7NzjYbzHpLqUCFKCAJfkAq7RimK7qUtAAAAAASUVORK5CYII="
+                  alt="img"
+                />
+              </li>
+              <li class="temp"><span>${Math.round(
+                d.temperature.maximum
+              )}°</span> <span>${Math.round(d.temperature.minimum)}°</span></li>
+            </ul>
+      </div>
+    `;
+    console.log(d);
+    console.log(dailyDays[0].innerHTML);
+    for (let dy in dailyDays) {
+      liDays.innerHTML = dailyDays[dy - 1].innerHTML;
+      dy++;
+      console.log(dy);
+      console.log(dailyDays[dy - 1].innerHTML);
+    }
+  });
+}
