@@ -85,7 +85,7 @@ function showWeather(response) {
   wind[0].innerHTML = `${cityWind}km/h`;
   wind[1].innerHTML = `${cityWind}km/h`;
   desc.innerHTML = cityDesc;
-  sunset.innerHTML = sunsetresponse.toLocaleTimeString();
+  sunset.innerHTML = sunsetresponse.toTimeString();
   // precip.innerHTML = precipitation;
   feels.innerHTML = `${feelsLike}°C`;
   visib.innerHTML = `${visibility / 1000}km`;
