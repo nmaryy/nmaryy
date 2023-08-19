@@ -141,33 +141,37 @@ function getPrediction(coordinates, city) {
 }
 
 function displayPrediction(response) {
-  let dailyDays = response.data.daily;
-  dailyDays.forEach((d) => {
+  let forecasts = response.data.daily;
+  let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  let dayHTML = `div class="days col-3">`;
+  forecasts.forEach(function (d, index) {
     let dayd = new Date(d.time * 1000);
-    dayName = dayd.toGMTString().split(',')[0];
-    d.innerHTML = `
-    <div class="${dayName}">
-            <ul>
-              <li class="day">${dayName}</li>
-              <li class="icon">
-                <img
-                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAAQBJREFUaN7t2csNwyAMBmBGYYSMwhgdgxEYjRW6ARu4HNyqB0CKednElf5b2/hLSALGAICRHKMABSjgUMDdD7xfLifkxByoJOJ33O3/nwHIhVgsKDWKriXhb+0WQD6wJxZegvhlADzrcUDhpeFlpwLyAa5BZ711Na4pgAXFNxFdABw2K4r/R9iRgLiw+N89MQSATxvYFN8F2DB0qkOJCggbi/8m9AASA0AiAXBuA0ziKIDACBAogMgIECkAYBUFKEABzwOIf4yKf5HJnkqIn8wxmk775y5oxC8pj1jUH9FWEd/YOqK1eERz94j2euFqUCF7NzjYbzHpLqUCFKCAJfkAq7RimK7qUtAAAAAASUVORK5CYII="
-                  alt="img"
-                />
-              </li>
-              <li class="temp"><span>${Math.round(
-                d.temperature.maximum
-              )}°</span> <span>${Math.round(d.temperature.minimum)}°</span></li>
-            </ul>
-      </div>
-    `;
-    console.log(d);
-    console.log(dailyDays[0].innerHTML);
-    for (let dy in dailyDays) {
-      liDays.innerHTML = dailyDays[dy - 1].innerHTML;
-      dy++;
-      console.log(dy);
-      console.log(dailyDays[dy - 1].innerHTML);
+    dayName = dayd.getDay();
+    if (index < 8) {
+      dayHTML =
+        dayHTML +
+        `
+      <div class="${days[dayName]}">
+              <ul>
+                <li class="day">${days[dayName]}</li>
+                <li class="icon">
+                  <img
+                    src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${
+                      d.condition.icon
+                    }.png"
+                    alt="img"
+                  />
+                </li>
+                <li class="temp"><span>${Math.round(
+                  d.temperature.maximum
+                )}°</span> <span>${Math.round(
+          d.temperature.minimum
+        )}°</span></li>
+              </ul>
+        </div>
+      `;
     }
   });
+  dayHTML = dayHTML + `</div>`;
+  // liDays.innerHTML = dayHTML;
 }
