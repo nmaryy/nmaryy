@@ -3,7 +3,7 @@
 let key = '0ebc654fccbc00189d5408f3d6f15b08'; //private
 let btncurr = document.getElementById('btncurr');
 let form = document.querySelector('.form');
-let liDays = document.querySelector('.days');
+let liDays = document.querySelector('.dayscontainer');
 let temp = document.getElementById('temp');
 let input = document.getElementById('input');
 let mainImg = document.getElementById('main');
@@ -143,13 +143,14 @@ function getPrediction(coordinates, city) {
 function displayPrediction(response) {
   let forecasts = response.data.daily;
   let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  let dayHTML = `div class="days col-3">`;
+  let forecastElement = document.querySelector('#element');
+  let forecastHTML = '';
   forecasts.forEach(function (d, index) {
     let dayd = new Date(d.time * 1000);
     dayName = dayd.getDay();
     if (index < 8) {
-      dayHTML =
-        dayHTML +
+      forecastHTML =
+        forecastHTML +
         `
       <div class="${days[dayName]}">
               <ul>
@@ -168,10 +169,11 @@ function displayPrediction(response) {
           d.temperature.minimum
         )}°</span></li>
               </ul>
-        </div>
+      </div>
       `;
     }
+    console.log(d);
+    forecastHTML = forecastHTML + `</div>`;
+    forecastElement.innerHTML = forecastHTML;
   });
-  dayHTML = dayHTML + `</div>`;
-  // liDays.innerHTML = dayHTML;
 }
